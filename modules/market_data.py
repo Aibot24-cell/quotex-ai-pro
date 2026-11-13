@@ -34,16 +34,21 @@ def get_market_feed_simulation(pair_name="EUR/USD", market_type="Real Market"):
             "end_time": (now + timedelta(minutes=1)).strftime("%H:%M:%S")
         }
     
-    # রিয়েল মার্কেট বা ক্রিপ্টোর জন্য গ্লোবাল ফরেক্স ফিড ম্যাপ
-    symbol_map = {
-        "EUR/USD": "EURUSD=X",
-        "GBP/USD": "GBPUSD=X",
-        "USD/JPY": "USDJPY=X",
-        "AUD/USD": "AUDUSD=X",
-        "EUR/GBP": "EURGBP=X",
-        "USD/CHF": "USDCHF=X",
-        "BTC/USD": "BTC-USD"
-    }
+   # রিয়েল মার্কেট বা ক্রিপ্টোর জন্য গ্লোবাল ফরেক্স ফিড ম্যাপ
+symbol_map = {
+    "EUR/USD": "EURUSD=X",
+    "GBP/USD": "GBPUSD=X",
+    "USD/JPY": "USDJPY=X",
+    "AUD/USD": "AUDUSD=X",
+    "EUR/GBP": "EURGBP=X",
+    "USD/CHF": "USDCHF=X",
+    "AUD/CAD": "AUDCAD=X",
+    "EUR/AUD": "EURAUD=X",
+    "GBP/CAD": "GBPCAD=X",
+    "NZD/USD": "NZDUSD=X",
+    "USD/CAD": "USDCAD=X",
+    "BTC/USD": "BTC-USD"
+}
     
     ticker = symbol_map.get(clean_name, "EURUSD=X")
     
