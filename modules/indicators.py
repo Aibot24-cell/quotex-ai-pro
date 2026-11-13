@@ -3,15 +3,9 @@ import numpy as np
 
 def calculate_technical_indicators(df):
     """
-    Calculates comprehensive technical indicators using pure Pandas/NumPy:
-    - RSI (Relative Strength Index)
-    - EMA (Exponential Moving Average 12 & 26)
-    - MACD & Signal Line
-    - Bollinger Bands
-    - Stochastic Oscillator (%K, %D)
-    - ATR (Average True Range)
-    - CCI (Commodity Channel Index)
-    - ADX (Average Directional Index)
+    Calculates comprehensive technical indicators and Support/Resistance levels:
+    - RSI, EMA, MACD, Bollinger Bands, Stochastic, ATR, CCI, ADX
+    - Dynamic Support & Resistance Levels (Pivot-based calculation)
     """
     try:
         df = df.copy()
@@ -87,6 +81,12 @@ def calculate_technical_indicators(df):
         dx = 100 * (plus_di - minus_di).abs() / ((plus_di + minus_di) + 1e-10)
         df['ADX'] = dx.rolling(window=14).mean()
         df['ADX'].fillna(25, inplace=True)
+        
+        # 9. Support & Resistance Levels (Rolling Pivot Calculation)
+        df['Resistance'] = high.rolling(window=14).max()
+        df['Support'] = low.rolling(window=14).min()
+        df['Resistance'].fillna(close * 1.01, inplace=True)
+        df['Support'].fillna(close * 0.99, inplace=True)
         
         return df
     except Exception as e:
